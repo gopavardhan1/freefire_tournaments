@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free Fire Tournament Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Exo 2', sans-serif;
+        background-color: #0d0f1a;
+        color: #e5e7eb;
+        overflow: hidden;
+      }
+      
+      .login-page-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse at 70% 80%, #1a1a2e 0%, #0d0f1a 40%, #0a0c14 100%);
+        background-size: cover;
+        background-position: center;
+        z-index: -2;
+      }
+      
+      @keyframes fade-in {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
+
+      @keyframes pulse-glow {
+        0%, 100% { filter: drop-shadow(0 0 5px #0ea5e9); }
+        50% { filter: drop-shadow(0 0 15px #0ea5e9); }
+      }
+      .animate-pulse-glow { animation: pulse-glow 3s infinite ease-in-out; }
+
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+      }
+      .animate-shake { animation: shake 0.5s ease-in-out; }
+
+      @keyframes breathing {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+      }
+      .animate-breathing { animation: breathing 5s infinite ease-in-out; }
+
+      .glass-card {
+        background: rgba(17, 24, 39, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+      }
+      
+      @keyframes border-glow {
+          from { border-color: rgba(56, 189, 248, 0.2); box-shadow: 0 0 10px rgba(56, 189, 248, 0.1); }
+          to { border-color: rgba(56, 189, 248, 0.6); box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }
+      }
+      .animated-border-glow { animation: border-glow 4s infinite alternate; }
+      
+      .input-field {
+        background: rgba(10, 15, 25, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s;
+      }
+      .input-wrapper:focus-within .input-field {
+        border-color: #22d3ee;
+        box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+      }
+      
+      .submit-btn {
+        background: linear-gradient(90deg, #0ea5e9, #22d3ee);
+        transition: all 0.3s ease;
+      }
+      .submit-btn:hover {
+        box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+        transform: scale(1.05);
+      }
+      .submit-btn:disabled {
+        background: #374151;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .custom-checkbox input:checked + .checkbox-bg {
+        background-color: #22d3ee;
+        border-color: #22d3ee;
+      }
+      .custom-checkbox input:checked + .checkbox-bg .checkbox-dot {
+        transform: translateX(100%);
+      }
+
+      .app-footer {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        color: #9ca3af;
+        z-index: 20;
+      }
+
+      .footer-line {
+        text-shadow: 0 0 5px rgba(56, 189, 248, 0.5), 0 0 10px rgba(56, 189, 248, 0.3);
+        animation: shimmer 5s infinite linear;
+        transition: all 0.3s ease;
+      }
+      .app-footer:hover .footer-line {
+        text-shadow: 0 0 10px rgba(103, 232, 249, 0.7), 0 0 20px rgba(103, 232, 249, 0.5);
+        transform: scale(1.05);
+      }
+
+      @keyframes shimmer {
+        0% { text-shadow: 0 0 5px rgba(56, 189, 248, 0.5); }
+        50% { text-shadow: 0 0 15px rgba(103, 232, 249, 0.7); }
+        100% { text-shadow: 0 0 5px rgba(56, 189, 248, 0.5); }
+      }
+      
+      /* Boss Dashboard Specific Styles */
+      .circuit-bg {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #0a0c14;
+          background-image: 
+              linear-gradient(to right, rgba(79, 70, 229, 0.2) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(79, 70, 229, 0.2) 1px, transparent 1px);
+          background-size: 40px 40px;
+          animation: pan-bg 20s linear infinite;
+          z-index: 0;
+      }
+
+      @keyframes pan-bg {
+        0% { background-position: 0 0; }
+        100% { background-position: 40px 40px; }
+      }
+
+      @keyframes fade-in-up {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in-up { animation: fade-in-up 0.5s ease-out forwards; }
+
+
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.11.0",
+    "@heroicons/react/": "https://esm.sh/@heroicons/react@^2.2.0/",
+    "framer-motion": "https://esm.sh/framer-motion@^12.23.12",
+    "react-icons/": "https://esm.sh/react-icons@^5.5.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="text-white">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

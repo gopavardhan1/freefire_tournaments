@@ -1,0 +1,6 @@
+{
+  "name": "Free Fire Tournament Hub",
+  "description": "An application for managing and participating in Free Fire tournaments, featuring role-based access for users, admins, and a boss. Users can join matches, manage their balance, and view match history. Admins can create and manage tournaments. The Boss oversees the entire system.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
